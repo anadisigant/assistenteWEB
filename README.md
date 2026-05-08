@@ -1,11 +1,11 @@
-# 🤖 RoboLab — Assistente Inteligente de Laboratório
+# RoboLab — Assistente Inteligente de Laboratório
 
 > Trabalho avaliativo da disciplina de **Inteligência Artificial**  
 > Curso de Engenharia / Ciência da Computação
 
 ---
 
-## 📋 Descrição
+## Descrição
 
 O **RoboLab** é um assistente virtual baseado em reconhecimento de fala em língua portuguesa, desenvolvido para controlar e monitorar um laboratório de robótica educacional por meio de **comandos de voz**.
 
@@ -13,7 +13,7 @@ O sistema utiliza o modelo de deep learning **Wav2Vec2** para transcrever falas 
 
 ---
 
-## 🎯 Objetivos do Projeto
+## Objetivos do Projeto
 
 - Aplicar técnicas de **Processamento de Linguagem Natural (PLN)** para interpretar comandos em português.
 - Integrar um modelo de **reconhecimento automático de fala (ASR)** pré-treinado via Hugging Face Transformers.
@@ -22,7 +22,7 @@ O sistema utiliza o modelo de deep learning **Wav2Vec2** para transcrever falas 
 
 ---
 
-## 🧠 Conceitos de IA Aplicados
+## Conceitos de IA Aplicados
 
 | Conceito | Tecnologia / Técnica Utilizada |
 |---|---|
@@ -75,7 +75,7 @@ assistente.py          ← Ponto de entrada; orquestra o sistema
 
 ---
 
-## 🗣️ Comandos de Voz Reconhecidos
+## Comandos de Voz Reconhecidos
 
 | Frase Exemplo | Ação |
 |---|---|
@@ -94,7 +94,7 @@ assistente.py          ← Ponto de entrada; orquestra o sistema
 
 ---
 
-## 🖥️ Interface Web
+## Interface Web
 
 A interface web (acessível em `http://localhost:7001`) apresenta:
 
@@ -104,7 +104,7 @@ A interface web (acessível em `http://localhost:7001`) apresenta:
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 
@@ -154,7 +154,7 @@ http://localhost:7001
 
 ---
 
-## 📦 Dependências
+## Dependências
 
 | Pacote | Finalidade |
 |---|---|
@@ -194,7 +194,7 @@ assistente virtual web/
 
 ---
 
-## 🧪 Testes
+## Testes
 
 O arquivo `testes.py` contém testes automatizados para validar:
 
@@ -210,7 +210,7 @@ python testes.py
 
 ---
 
-## 📊 Modos de Operação
+## Modos de Operação
 
 O sistema suporta dois modos, configuráveis diretamente em `assistente.py`:
 
@@ -221,12 +221,12 @@ O sistema suporta dois modos, configuráveis diretamente em `assistente.py`:
 
 ---
 
-## 👨‍💻 Autores
+## Autores
 
-Desenvolvido como trabalho avaliativo da disciplina de **Inteligência Artificial**.
+Desenvolvido com base em um projeto de _Luís Paulo da Silva Carvalho_ por _Ana Karolina Disigant Reis_ como trabalho avaliativo da disciplina de **Inteligência Artificial**.
 
 ---
 
-## 📄 Licença
+## Licença
 
 Projeto acadêmico — uso educacional.
