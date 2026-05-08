@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoboLab — Assistente Inteligente de Laboratório</title>
+    <meta name="description" content="Assistente inteligente para laboratório de robótica educacional. Monitore experimentos, temperatura, energia e registre atividades por voz.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Animated background -->
+    <div class="bg-grid"></div>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="18" stroke="url(#grad1)" stroke-width="2"/>
+                        <circle cx="20" cy="20" r="8" fill="url(#grad1)" opacity="0.3"/>
+                        <circle cx="20" cy="20" r="3" fill="url(#grad1)"/>
+                        <line x1="20" y1="2" x2="20" y2="10" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="20" y1="30" x2="20" y2="38" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="2" y1="20" x2="10" y2="20" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="30" y1="20" x2="38" y2="20" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="grad1" x1="0" y1="0" x2="40" y2="40">
+                                <stop offset="0%" stop-color="#00d4ff"/>
+                                <stop offset="100%" stop-color="#7c3aed"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">RoboLab</span>
+                    <span class="logo-subtitle">Assistente Inteligente</span>
+                </div>
+            </div>
+            <div class="header-status">
+                <div class="status-dot" id="systemStatusDot"></div>
+                <span id="systemStatusLabel">Sistema Offline</span>
+            </div>
+        </header>
+
+        <!-- Main grid -->
+        <main class="main-grid">
+
+            <!-- Voice Command Panel -->
+            <section class="panel voice-panel" id="voicePanel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <span class="panel-icon">🎙</span>
+                        Comando de Voz
+                    </h2>
+                </div>
+
+                <div class="mic-area">
+                    <button id="recordButton" class="mic-btn" title="Pressione para gravar um comando de voz">
+                        <div class="mic-rings">
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-2"></div>
+                            <div class="ring ring-3"></div>
+                        </div>
+                        <div class="mic-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="9" y="2" width="6" height="12" rx="3" fill="currentColor"/>
+                                <path d="M5 10c0 3.866 3.134 7 7 7s7-3.134 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="12" y1="17" x2="12" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="8" y1="22" x2="16" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </button>
+                    <p class="mic-hint" id="micHint">Pressione para falar</p>
+                </div>
+
+                <div class="transcription-box" id="transcriptionBox">
+                    <div class="transcription-label">Transcrição</div>
+                    <div class="transcription-text" id="transcriptionText">Aguardando comando...</div>
+                </div>
+
+                <div class="feedback-box" id="feedbackBox">
+                    <div class="feedback-text" id="feedbackText">O resultado do comando aparecerá aqui</div>
+                </div>
+
+                <!-- Command reference -->
+                <div class="commands-ref">
+                    <div class="commands-ref-title">Comandos disponíveis</div>
+                    <ul class="commands-list">
+                        <li><span class="cmd-pill cmd-on">Ligar</span> / <span class="cmd-pill cmd-off">Desligar</span> sistema da bancada</li>
+                        <li><span class="cmd-pill cmd-start">Iniciar</span> / <span class="cmd-pill cmd-stop">Encerrar</span> monitoramento do experimento</li>
+                        <li><span class="cmd-pill cmd-start">Iniciar</span> / <span class="cmd-pill cmd-stop">Encerrar</span> monitoramento de energia</li>
+                        <li><span class="cmd-pill cmd-start">Iniciar</span> / <span class="cmd-pill cmd-stop">Encerrar</span> monitoramento de temperatura</li>
+                        <li><span class="cmd-pill cmd-start">Iniciar</span> / <span class="cmd-pill cmd-stop">Encerrar</span> registro da atividade</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Right column: monitoring panels -->
+            <div class="monitoring-col">
+
+                <!-- Bancada -->
+                <div class="panel monitor-card" id="cardBancada">
+                    <div class="monitor-card-header">
+                        <div class="monitor-icon">🔌</div>
+                        <div class="monitor-info">
+                            <div class="monitor-name">Sistema da Bancada</div>
+                            <div class="monitor-desc">Ambiente de monitoramento e coleta</div>
+                        </div>
+                        <div class="monitor-badge badge-offline" id="badgeBancada">OFFLINE</div>
+                    </div>
+                    <div class="monitor-detail" id="detailBancada">—</div>
+                </div>
+
+                <!-- Experimento -->
+                <div class="panel monitor-card" id="cardExperimento">
+                    <div class="monitor-card-header">
+                        <div class="monitor-icon">🔬</div>
+                        <div class="monitor-info">
+                            <div class="monitor-name">Monitoramento do Experimento</div>
+                            <div class="monitor-desc">Acompanhamento das condições da prática</div>
+                        </div>
+                        <div class="monitor-badge badge-offline" id="badgeExperimento">PARADO</div>
+                    </div>
+                    <div class="monitor-detail" id="detailExperimento">—</div>
+                </div>
+
+                <!-- Energia -->
+                <div class="panel monitor-card" id="cardEnergia">
+                    <div class="monitor-card-header">
+                        <div class="monitor-icon">⚡</div>
+                        <div class="monitor-info">
+                            <div class="monitor-name">Monitoramento de Energia</div>
+                            <div class="monitor-desc">Estimativa de consumo energético</div>
+                        </div>
+                        <div class="monitor-badge badge-offline" id="badgeEnergia">PARADO</div>
+                    </div>
+                    <div class="monitor-metrics" id="metricsEnergia">
+                        <div class="metric">
+                            <div class="metric-value" id="potenciaAtual">—</div>
+                            <div class="metric-label">Potência (W)</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value" id="consumoTotal">—</div>
+                            <div class="metric-label">Consumo (Wh)</div>
+                        </div>
+                    </div>
+                    <div class="monitor-detail" id="detailEnergia">—</div>
+                </div>
+
+                <!-- Temperatura -->
+                <div class="panel monitor-card" id="cardTemperatura">
+                    <div class="monitor-card-header">
+                        <div class="monitor-icon">🌡</div>
+                        <div class="monitor-info">
+                            <div class="monitor-name">Monitoramento de Temperatura</div>
+                            <div class="monitor-desc">Leitura simulada dos componentes</div>
+                        </div>
+                        <div class="monitor-badge badge-offline" id="badgeTemperatura">PARADO</div>
+                    </div>
+                    <div class="monitor-metrics" id="metricsTemperatura">
+                        <div class="metric">
+                            <div class="metric-value temp-value" id="tempAtual">—</div>
+                            <div class="metric-label">Temperatura (°C)</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value" id="alertasCount">—</div>
+                            <div class="metric-label">Alertas</div>
+                        </div>
+                    </div>
+                    <div class="monitor-detail alert-detail" id="detailTemperatura">—</div>
+                </div>
+
+                <!-- Registro -->
+                <div class="panel monitor-card" id="cardRegistro">
+                    <div class="monitor-card-header">
+                        <div class="monitor-icon">📋</div>
+                        <div class="monitor-info">
+                            <div class="monitor-name">Registro da Atividade</div>
+                            <div class="monitor-desc">Relatório estruturado da prática</div>
+                        </div>
+                        <div class="monitor-badge badge-offline" id="badgeRegistro">PARADO</div>
+                    </div>
+                    <div class="monitor-detail" id="detailRegistro">—</div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Event log -->
+        <section class="panel log-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">
+                    <span class="panel-icon">📡</span>
+                    Log de Eventos
+                </h2>
+                <button class="clear-btn" id="clearLogBtn" title="Limpar log">Limpar</button>
+            </div>
+            <div class="log-container" id="logContainer">
+                <div class="log-entry log-info">
+                    <span class="log-time" id="initTime"></span>
+                    <span class="log-msg">RoboLab Assistente iniciado. Aguardando comandos de voz.</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recorderjs/0.1.0/recorder.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

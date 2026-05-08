@@ -1,0 +1,34 @@
+{
+    "acoes": [
+        {
+            "nome": "ligar",
+            "dispositivos": ["sistema", "bancada"]
+        },
+        {
+            "nome": "desligar",
+            "dispositivos": ["sistema", "bancada"]
+        },
+        {
+            "nome": "iniciar",
+            "dispositivos": [
+                "monitoramento",
+                "experimento",
+                "energia",
+                "temperatura",
+                "registro",
+                "atividade"
+            ]
+        },
+        {
+            "nome": "encerrar",
+            "dispositivos": [
+                "monitoramento",
+                "experimento",
+                "energia",
+                "temperatura",
+                "registro",
+                "atividade"
+            ]
+        }
+    ]
+}
