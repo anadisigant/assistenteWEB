@@ -1,7 +1,7 @@
 # RoboLab — Assistente Inteligente de Laboratório
 
 > Trabalho avaliativo da disciplina de **Inteligência Artificial**  
-> Curso de Engenharia / Ciência da Computação
+> Bacharelado em Sistemas de Informação - IFBA Campus Vitória da Conquista
 
 ---
 
